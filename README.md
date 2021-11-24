@@ -4,6 +4,7 @@
 ## Descrição
 Esta é uma versão alternativa feita em `Python` com a engine `Ursina` do aplicatio Real Drum (presente no Google Play Store).
 
+![](./demo_image.png)
 
 ## Como executar
 
