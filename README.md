@@ -18,3 +18,8 @@ e para executar, use o seguinte comando:
 ```
 python3 main.py
 ```
+
+
+## Adicional
+
+A estrutura do código não está muito boa, e nn sei como resolver a parte da função `update` (ursina) funcionar dentro de uma `Class`, assim como `input`.
