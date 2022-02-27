@@ -31,4 +31,6 @@ Este arquivo contém as configurações da bateria virtual. Desde kit que será 
 
 ## Adicional
 Você pode adicionar mais kits e utilizá-los no RealDrumUrsina.
-Para adicionar, basta pegar um arquivo de exportação de kit, que pode conseguir compartilhando direto do RealDrum android, extrair o arquivo `.realdrum`, renomear a pasta que tem dentro dele e mover para onde estão os outros drumkits.
+Para adicionar, basta pegar um arquivo de exportação de kit, que pode conseguir compartilhando direto do RealDrum (android), extrair o arquivo `.realdrum`, renomear a pasta que há dentro dele e mover para onde estão os outros drumkits.
+
+Observação: O arquivo `.realdrum` pode ser extra
