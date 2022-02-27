@@ -1,5 +1,5 @@
 # Kit
-kit = "hardrock_kit"
+kit = "kit0"
 
 # Teclas
 kickl_key		=	'space'
