@@ -11,10 +11,10 @@ crashl_key = ['q','w']
 crashm_key = ['e', 'r']
 crashr_key = ['y', 'u']
 ride_key = ['i', 'o']
-tom1_key =	'f'
-tom2_key =	'g'
-tom3_key =	'h'
-floortom_key =   ['j', 'k']
+tom1_key = 'f'
+tom2_key = 'g'
+tom3_key = 'h'
+floortom_key = ['j', 'k']
 
 
 # Volume
