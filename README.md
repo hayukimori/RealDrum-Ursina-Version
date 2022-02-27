@@ -1,5 +1,5 @@
 # RealDrum Ursina
-****
+
 ### Descrição
 
 RealDrum Ursina Version é uma versão alternativa do aplicativo RealDrum (android), mas focando em usuários de PC (Mais especificamente Linux).
