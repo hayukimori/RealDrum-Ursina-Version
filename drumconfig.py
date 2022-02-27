@@ -1,19 +1,20 @@
+# Kit
+kit = "hardrock_kit"
 
 # Teclas
 kickl_key		=	'space'
 kickr_key		= 	'b'
 snare_key		=	['c', 'v']
 close_hh_key	=	['a', 'x']
-open_hh_key		=	'z'
-crashl_key		=	'q'
-splash_key 		=	'e'
-crashr_key		=	'y'
-ride_key		=	'i'
-tom1_key		=	'g'
-tom2_key		=	'h'
-tom3_key		=	'j'
-floortom_key    =   'k'
-
+open_hh_key		=	['z', 'n']
+crashl_key		=	['q','w']
+crashm_key 		=	['e', 'r']
+crashr_key		=	['y', 'u']
+ride_key		=	['i', 'o']
+tom1_key		=	'f'
+tom2_key		=	'g'
+tom3_key		=	'h'
+floortom_key    =   ['j', 'k']
 
 
 # Volume

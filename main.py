@@ -6,147 +6,356 @@ from importlib import reload as rlib
 app = Ursina()
 
 
-
-camera.y = -.5
-
-background	= Entity(parent=window, model='quad', texture='fundo.jpg', scale=(16,9), z=.3, y=-.5)
-
-
-kickl   = Entity(model='quad', texture='kickl.png', scale=3.2, y=-3, x=-1.7, z=0)
-kickr   = Entity(model='quad', texture='kickr.png', scale=3.2, y=-3, x=1.6, z=0)
-snare   = Entity(model='quad', texture='snare.png', scale=3.2, y=-1.2, x=0, z=-.2)
-tom1    = Entity(model='quad', texture='tom1.png', scale=2.5, y=-.2, x=-2.2, z=-.3)
-tom2    = Entity(model='quad', texture='tom2.png', scale=2.5, y=.9, x=0, z=-.3)
-tom3    = Entity(model='quad', texture='tom3.png', scale=2.5, y=-.2, x=2.2, z=-.3)
-splash  = Entity(model='quad', texture='crashm_reflector.png', scale=2.2, y=1.8, x=-1.8, z=-.6)
-crashl  = Entity(model='quad', texture='crashl.png', scale=3.5, y=1, x=-4.5, z=-.6)
-crashr  = Entity(model='quad', texture='crashr.png', scale=2.8, y=1.9, x=1.6, z=-.7)
-ride    = Entity(model='quad', texture='ride.png', scale=3.5, y=.9, x=4.6, z=-.7)
-close_hh= Entity(model='quad', texture='closehhl.png', scale=2.8, y=-1.2, x=-5.2, z=-.1)
-open_hh = Entity(model='quad', texture='openhhl.png', scale=2.8, y=-2.8, x=-5.3, z=0)
-floortom= Entity(model='quad', texture='floorr.png', scale=3.6, y=-2.7, x=5, z=0)
+################ [[RECEBER DRUMKIT]] ######################
+drumkit = dc.kit + "/"
+###########################################################
 
 
-def update():
-#	rlib(dc)
+## ==> Define texturas
+bg_texture = drumkit + "fundo"
+kickl_texture = drumkit + "kickl"
+kickr_texture = drumkit + "kickr"
+snare_texture = drumkit + "snare"
+tom1_texture = drumkit + "tom1"
+tom2_texture = drumkit + "tom2"
+tom3_texture = drumkit + "tom3"
+crashm_texture = drumkit + "crashm" 
+crashl_texture = drumkit + "crashl"
+crashr_texture = drumkit + "crashr"
+ride_texture = drumkit + "ride"
+closehhl_texture = drumkit + "closehhl"
+openhhl_texture = drumkit + "openhhl"
+floortom_texture = drumkit + "floorr"
 
-	if held_keys[dc.kickl_key]:
-		kickl.z = -.1
-	else:
-		kickl.z = 0
+		
+## ==> Define sons
+kickl_sound = drumkit + "kick.mp3"
+kickr_sound = drumkit + "kick.mp3"
+snare_sound = drumkit + "snare.mp3"
+tom1_sound = drumkit + "tom1.mp3"
+tom2_sound = drumkit + "tom2.mp3"
+tom3_sound = drumkit + "tom3.mp3"
+crashm_sound = drumkit + "crashm.mp3"
+crashl_sound = drumkit + "crashl.mp3"
+crashr_sound = drumkit + "crashr.mp3"
+ride_sound = drumkit + "ride.mp3"
+closehhl_sound = drumkit + "closehh.mp3"
+openhhl_sound = drumkit + "openhh.mp3"
+floortom_sound = drumkit + "floor.mp3"
+##
 
-	if held_keys[dc.kickr_key]:
-		kickr.z = -.1
-	else:
-		kickr.z = 0
 
-	if held_keys[dc.snare_key[0]] or held_keys[dc.snare_key[1]]:
-		snare.z = -.2
-	else:
-		snare.z = -.3
+background	= Entity(model='quad', texture=bg_texture, scale=(16*camera.aspect_ratio,9*camera.aspect_ratio), z=.3, y=-.5)
 
-	if held_keys[dc.tom1_key]:
-		tom1.z = -.4
-	else:
-		tom1.z = -.5
+class GraphicalDrum(Entity):
+	def __init__(self):
+		super().__init__()
 
-	if held_keys[dc.tom2_key]:
-		tom2.z = -.4
-	else:
-		tom2.z = -.5
+		self.kickl = Entity(
+			model='quad',
+			texture=kickl_texture, 
+			scale=3.2, 
+			y=-3, 
+			x=-1.7, 
+			z=-.1
+			)
 
-	if held_keys[dc.tom3_key]:
-		tom3.z = -.4
-	else:
-		tom3.z = -.5
+		self.kickr = Entity(
+			model='quad', 
+			texture=kickr_texture, 
+			scale=3.2, 
+			y=-3, 
+			x=1.6, 
+			z=-.1
+			)
 
-	if held_keys[dc.splash_key]:
-		splash.z = -.6
-	else:
-		splash.z = -.7
+		self.snare = Entity(
+			model='quad', 
+			texture=snare_texture, 
+			scale=3.2, 
+			y=-1.2, 
+			x=0, 
+			z=-.3
+			)
 
-	if held_keys[dc.crashl_key]:
-		crashl.z = -.6
-	else:
-		crashl.z = -.7
+		self.tom1 = Entity(
+			model='quad', 
+			texture=tom1_texture, 
+			scale=2.5, 
+			y=-.2, 
+			x=-2.2, 
+			z=-.5
+			)
 
-	if held_keys[dc.crashr_key]:
-		crashr.z = -.6
-	else:
-		crashr.z = -.7
+		self.tom2 = Entity(
+			model='quad', 
+			texture=tom2_texture, 
+			scale=2.5, 
+			y=.9, 
+			x=0, 
+			z=-.5
+			)
 
-	if held_keys[dc.ride_key]:
-		ride.z = -.6
-	else:
-		ride.z = -.7
+		self.tom3 = Entity(
+			model='quad', 
+			texture=tom3_texture, 
+			scale=2.5, 
+			y=-.2, 
+			x=2.2, 
+			z=-.5
+			)
 
-	if held_keys[dc.close_hh_key[0]] or held_keys[dc.close_hh_key[1]]:
-		close_hh.z = -.1
-	else:
-		close_hh.z = -.2
+		self.crashm = Entity(
+			model='quad', 
+			texture=crashm_texture, 
+			scale=2.2, 
+			y=1.8, 
+			x=-1.8, 
+			z=-.7
+			)
 
-	if held_keys[dc.open_hh_key]:
-		open_hh.z = 0
-	else:
-		open_hh.z = -.1
+		self.crashl = Entity(
+			model='quad', 
+			texture=crashl_texture, 
+			scale=3.5, 
+			y=1, 
+			x=-4.5, 
+			z=-.7)
 
-	if held_keys[dc.floortom_key]:
-		floortom.z = -.1
-	else:
-		floortom.z = 0
+		self.crashr = Entity(
+			model='quad', 
+			texture=crashr_texture, 
+			scale=2.8, 
+			y=1.9, 
+			x=1.6, 
+			z=-.7
+			)
 
+		self.ride = Entity(
+			model='quad', 
+			texture=ride_texture, 
+			scale=3.5, 
+			y=.9, 
+			x=4.6, 
+			z=-.9
+			)
+
+		self.close_hh = Entity(
+			model='quad', 
+			texture=closehhl_texture, 
+			scale=2.8, 
+			y=-1.2, 
+			x=-5.2, 
+			z=-.2
+			)
+
+		self.open_hh = Entity(
+			model='quad', 
+			texture=openhhl_texture, 
+			scale=2.8, 
+			y=-2.8, 
+			x=-5.3, 
+			z=-.1
+			)
+
+		self.floortom = Entity(
+			model='quad', 
+			texture=floortom_texture, 
+			scale=3.6, 
+			y=-2.7, 
+			x=5, 
+			z=-.1
+			)
+
+
+		self.kickl.update = self.KickLUpdate
+		self.kickr.update = self.KickRUpdate
+		self.snare.update = self.SnareUpdate
+		self.tom1.update = self.Tom1Update
+		self.tom2.update = self.Tom2Update
+		self.tom3.update = self.Tom3Update
+		self.crashm.update = self.CrashMUpdate
+		self.crashl.update = self.CrashLUpdate
+		self.crashr.update = self.CrashRUpdate
+		self.ride.update = self.RideUpdate
+		self.close_hh.update = self.CloseHHUpdate
+		self.open_hh.update = self.OpenHHUpdate
+		self.floortom.update = self.FloorTomUpdate
+
+
+
+		# => Update sections
+
+
+	def KickLUpdate(self):
+		if held_keys[dc.kickl_key]:
+			self.kickl.scale = 3.1
+		else:
+			self.kickl.scale = 3.2
+
+
+	def KickRUpdate(self):
+		if held_keys[dc.kickr_key]:
+			self.kickr.scale = 3.1
+		else:
+			self.kickr.scale = 3.2
+
+
+	def SnareUpdate(self):
+		if held_keys[dc.snare_key[0]] or held_keys[dc.snare_key[1]]:
+			self.snare.scale = 3.1
+		else:
+			self.snare.scale = 3.2
+
+
+	def Tom1Update(self):
+		if held_keys[dc.tom1_key]:
+			self.tom1.scale = 2.4
+		else:
+			self.tom1.scale = 2.5
+
+
+	def Tom2Update(self):
+		if held_keys[dc.tom2_key]:
+			self.tom2.scale = 2.4
+		else:
+			self.tom2.scale = 2.4
+
+
+	def Tom3Update(self):
+		if held_keys[dc.tom3_key]:
+			self.tom3.scale = 2.4
+		else:
+			self.tom3.scale = 2.5
+
+
+	def CrashMUpdate(self):
+		if held_keys[dc.crashm_key[0]] or held_keys[dc.crashm_key[1]]:
+			self.crashm.scale = 2.1
+		else:
+			self.crashm.scale = 2.2
+
+
+	def CrashLUpdate(self):
+		if held_keys[dc.crashl_key[0]] or held_keys[dc.crashl_key[1]]:
+			self.crashl.scale = 3.4
+		else:
+			self.crashl.scale = 3.5
+
+
+	def CrashRUpdate(self):
+		if held_keys[dc.crashr_key[0]] or held_keys[dc.crashr_key[1]]:
+			self.crashr.scale = 2.7
+		else:
+			self.crashr.scale = 2.8
+
+
+	def RideUpdate(self):
+		if held_keys[dc.ride_key[0]] or held_keys[dc.ride_key[1]]:
+			self.ride.scale = 3.4
+		else:
+			self.ride.scale = 3.5
+
+
+	def CloseHHUpdate(self):
+		if held_keys[dc.close_hh_key[0]] or held_keys[dc.close_hh_key[1]]:
+			self.close_hh.scale = 2.7
+		else:
+			self.close_hh.scale = 2.8
+
+	def OpenHHUpdate(self):
+		if held_keys[dc.open_hh_key[0]] or held_keys[dc.open_hh_key[1]]:
+			self.open_hh.scale = 2.7
+		else:
+			self.open_hh.scale = 2.8
+
+	def FloorTomUpdate(self):
+		if held_keys[dc.floortom_key[0]] or held_keys[dc.floortom_key[1]]:
+			self.floortom.scale = 3.5
+		else:
+			self.floortom.scale = 3.6
+
+
+
+		# Assign 
+
+
+#############################################
+#	GET USER INPUT FUNCTION (FROM URSINA)   #
+#############################################
 
 def input(key):
+	# Kick L + R Sound
 	if key == dc.kickl_key or key == dc.kickr_key:
-		Audio('kick.mp3', volume=dc.kickl_vol)
+		Audio(kickl_sound, volume=dc.kickl_vol)
 
+	# Snare Sound
 	if key == dc.snare_key[0] or key == dc.snare_key[1]:
-		Audio('snare.mp3', volume=dc.snare_vol)
+		Audio(snare_sound, volume=dc.snare_vol)
 
+	# Tom 1 Sound
 	if key == dc.tom1_key:
-		Audio('tom1.mp3', volume=dc.tom1_vol)
+		Audio(tom1_sound, volume=dc.tom1_vol)
 
+	# Tom 2 Sound
 	if key == dc.tom2_key:
-		Audio('tom2.mp3', volume=dc.tom2_vol)
+		Audio(tom2_sound, volume=dc.tom2_vol)
 
+	# Tom 3 Sound
 	if key == dc.tom3_key:
-		Audio('tom3.mp3', volume=dc.tom3_vol)
+		Audio(tom3_sound, volume=dc.tom3_vol)
 
-	if key == dc.splash_key:
-		Audio('crashm.mp3', volume=dc.splash_vol)
+	# CrashM Sound
+	if key == dc.crashm_key[0] or key == dc.crashm_key[1]:
+		Audio(crashm_sound, volume=dc.splash_vol)
 
-	if key == dc.crashr_key:
-		Audio('crashr.mp3', volume=dc.crashr_vol)
+	# Crash R Sound
+	if key == dc.crashr_key[0] or key == dc.crashr_key[1]:
+		Audio(crashr_sound, volume=dc.crashr_vol)
 
-	if key == dc.crashl_key:
-		Audio('crashl.mp3', volume=dc.crashl_vol)
+	# Crash L Sound
+	if key == dc.crashl_key[0] or key == dc.crashl_key[1]:
+		Audio(crashl_sound, volume=dc.crashl_vol)
 
-	if key == dc.ride_key:
-		Audio('ride.mp3', volume=dc.ride_vol)
+	# Ride Sound
+	if key == dc.ride_key[0] or key == dc.ride_key[1]:
+		Audio(ride_sound, volume=dc.ride_vol)
 
+	# Close HH Sound
 	if key == dc.close_hh_key[0] or key == dc.close_hh_key[1]:
-		Audio('closehh.mp3', volume=dc.close_hh_vol)
+		Audio(closehhl_sound, volume=dc.close_hh_vol)
 
-	if key == dc.open_hh_key:
-		Audio('openhh.mp3', volume=dc.open_hh_vol)
+	# Open HH Sound
+	if key == dc.open_hh_key[0] or key == dc.open_hh_key[1]:
+		Audio(openhhl_sound, volume=dc.open_hh_vol)
 
-	if key == dc.floortom_key:
-		Audio('floor.mp3', volume=dc.floortom_vol)
+	# FloorTom Sound
+	if key == dc.floortom_key[0] or key == dc.floortom_key[1]:
+		Audio(floortom_sound, volume=dc.floortom_vol)
 
-
-def windowConfiguration():
-	window.title = "Virtual Duramu_U"
-	window.borderless = False
-	window.fullscreen = False
-	window.forced_aspect_ratio = 1.769
-	window.exit_button.visible = False
-	window.fps_counter.enabled = True
 
 
 def main():
 	windowConfiguration()
+	drum = GraphicalDrum()
 
 
-#EditorCamera()
-main()
+def windowConfiguration():
+	window.title = "RealDrum Linux"
+	window.borderless = False
+	window.fullscreen = False
+	window.exit_button.visible = False
+	window.fps_counter.enabled = True
+	camera.y = -.5
+
+
+if __name__ == "__main__":
+	main()
+
 app.run()
+
+
+#window.forced_aspect_ratio = 1.769
+
+
+# CÓDIGO NOVO
