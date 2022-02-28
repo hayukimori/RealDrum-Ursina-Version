@@ -345,7 +345,7 @@ def windowConfiguration():
 	window.borderless = False
 	window.fullscreen = False
 	window.exit_button.visible = False
-	window.fps_counter.enabled = True
+	window.fps_counter.enabled = False
 	camera.y = -.5
 
 
