@@ -5,8 +5,7 @@ from importlib import reload as rlib
 
 app = Ursina()
 
-
-################ [[RECEBER DRUMKIT]] ######################
+################### [[GET DRUMKIT]] #######################
 drumkit = dc.kit + "/"
 ###########################################################
 
@@ -46,6 +45,45 @@ floortom_sound = drumkit + "floor.mp3"
 
 
 background	= Entity(model='quad', texture=bg_texture, scale=(16*camera.aspect_ratio,9*camera.aspect_ratio), z=.3, y=-.5)
+
+# TOP BAR
+class TopBar(Entity):
+	def __init__(self):
+		super().__init__(
+			parent=camera.ui,
+			model='cube',
+			color=color.rgb(22,22,22),
+			scale_x=1.4,
+			scale_y=.1,
+			y=.45,
+			update = self.TopBarUpdate
+			)
+
+		self.realdrumLogo = Entity(
+			parent=self,
+			model='quad',
+			color = color.rgba(0,0,0,0),
+			scale_x=.015,
+			x=self.x + .022
+			)
+
+		self.realdrumLogoText = Text(
+			parent=self.realdrumLogo,
+			text="Real Drum",
+			font='Fonts/Ubuntu-B.ttf',
+			size=100,
+			scale_x=5,
+			scale_y=15,
+			x=-.1,
+			y=.15,
+			color=color.rgb(20,112,173)
+			)
+
+	def TopBarUpdate(self):
+		self.scale_x= camera.ui.scale_x
+		self.scale_y= camera.ui.scale_y / .1,
+		self.y= camera.ui.y + .45
+
 
 class GraphicalDrum(Entity):
 	def __init__(self):
@@ -334,28 +372,28 @@ def input(key):
 		Audio(floortom_sound, volume=dc.floortom_vol)
 
 
+def loadElements():
+	drum = GraphicalDrum()
+	topbar = TopBar()
 
 def main():
 	windowConfiguration()
-	drum = GraphicalDrum()
+	loadElements()
+	
 
 
 def windowConfiguration():
-	window.title = "RealDrum Linux"
+	window.title = "RealDrum - Ursina Cover"
 	window.borderless = False
 	window.fullscreen = False
 	window.exit_button.visible = False
 	window.fps_counter.enabled = False
+
 	camera.y = -.5
+	camera.fov = 38
 
 
 if __name__ == "__main__":
 	main()
 
 app.run()
-
-
-#window.forced_aspect_ratio = 1.769
-
-
-# CÓDIGO NOVO
