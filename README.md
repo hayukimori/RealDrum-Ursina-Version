@@ -15,7 +15,7 @@ Os seguintes pacotes são necessários para executar corretamente o programa:
 ```
 python3 - pode ser encontrado por padrão na distro
 ursina - instalado via pip (python3 -m pip install ursina)
-python-vlc
+python-vlc - instalado via pip (python3 -m pip install python-vlc)
 ```
 
 ##### Como executar
