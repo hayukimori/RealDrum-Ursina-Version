@@ -1,13 +1,10 @@
-import os, sys, shutil
+import os, sys
 from ursina import *
-from importlib import reload as rlib
 import configparser
 import vlc
 
 app = Ursina()
 parser = configparser.ConfigParser()
-
-
 
 
 class Cardinal:
@@ -52,10 +49,7 @@ class Cardinal:
 		open_hh_sound = drumkit + "openhh.mp3"
 		floortom_sound = drumkit + "floor.mp3"
 
-
-
 	def defineTextures():
-		## ==> Define texturas
 		global bg_texture
 		global kickl_texture
 		global kickr_texture
@@ -89,9 +83,7 @@ class Cardinal:
 		closehhl_texture = drumkit + "closehhl"
 		openhhl_texture = drumkit + "openhhl"
 		floortom_texture = drumkit + "floorr"
-
-				
-		
+	
 		
 	def defineKeys():
 		global kickl_key
@@ -122,7 +114,6 @@ class Cardinal:
 		tom3_key = parser.get('keys', 'tom3_key')
 		floortom_key = parser.get('keys', 'floortom_key')
 
-
 		snare_key = eval(snare_key)
 		close_hh_key = eval(close_hh_key)
 		open_hh_key = eval(open_hh_key)
@@ -131,7 +122,6 @@ class Cardinal:
 		crashr_key = eval(crashr_key)
 		ride_key = eval(ride_key)
 		floortom_key = eval(floortom_key)
-
 
 	def defineVolume():
 		global kickr_volume
@@ -149,7 +139,6 @@ class Cardinal:
 		global tom2_volume
 		global tom3_volume
 
-
 		kickr_volume = eval(parser.get('volume', 'kickr_vol'))
 		kickl_volume = eval(parser.get('volume', 'kickl_vol'))
 		snare_volume = eval(parser.get('volume', 'snare_vol'))
@@ -163,7 +152,6 @@ class Cardinal:
 		tom1_volume = eval(parser.get('volume', 'tom1_vol'))
 		tom2_volume = eval(parser.get('volume', 'tom2_vol'))
 		tom3_volume = eval(parser.get('volume', 'tom3_vol'))
-
 
 	def defineAudio():
 		# DualKey
@@ -195,8 +183,6 @@ class Cardinal:
 		tom1_audio = Audio(tom1_sound, volume=tom1_volume, autoplay=False)
 		tom2_audio = Audio(tom2_sound, volume=tom2_volume, autoplay=False)
 		tom3_audio = Audio(tom3_sound, volume=tom3_volume, autoplay=False)
-
-
 
 try:
 	parser.read("config.ini")
@@ -600,18 +586,14 @@ def input(key):
 		floortom_audio.play()
 		
 
-
 def loadElements():
 	drum = GraphicalDrum()
 	topbar = TopBar()
-
 
 def main():
 	windowConfiguration()
 	loadElements()
 	
-
-
 def windowConfiguration():
 	window.title = "RealDrum - Ursina Cover"
 	window.borderless = False
@@ -621,7 +603,6 @@ def windowConfiguration():
 
 	camera.y = -.5
 	camera.fov = 38
-
 
 if __name__ == "__main__":
 	main()
