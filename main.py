@@ -6,7 +6,6 @@ import vlc
 app = Ursina()
 parser = configparser.ConfigParser()
 
-
 class Cardinal:
 	def __init__(self):
 		print("Cardinal started")
@@ -192,11 +191,11 @@ try:
 
 
 except configparser.NoSectionError:
-	print("\n\n[ERROR]: Arquivo de configuração inválido\n\n")
+	print("\n\n[ERROR]: Invalid configuration file\n\n")
 	sys.exit(1)
 
 except Exception as e:
-	print("Ocorreu um erro desconhecido ou arquivo 'config.ini' inexistente")
+	print("An unknown error has occurred or the 'config.ini' file does not exist")
 	print(f"\n\nTexto do erro: {str(e)}")
 	sys.exit(1)
 
@@ -432,10 +431,6 @@ class GraphicalDrum(Entity):
 		self.floortom.update = self.FloorTomUpdate
 
 
-
-		# => Update sections
-
-
 	def KickLUpdate(self):
 		if held_keys[kickl_key]:
 			self.kickl.scale = 3.1
@@ -595,7 +590,7 @@ def main():
 	loadElements()
 	
 def windowConfiguration():
-	window.title = "RealDrum - Ursina Cover"
+	window.title = "RealDrum - Ursina"
 	window.borderless = False
 	window.fullscreen = False
 	window.exit_button.visible = False
