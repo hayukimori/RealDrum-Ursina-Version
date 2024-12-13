@@ -1,26 +1,16 @@
 import sys
-from pathlib import Path
 
 # Misc libs
 from configparser import ConfigParser
-from typing import Any
 
 # Ursina Libs
 import ursina
-from ursina import (Ursina,
-                    Audio,
-                    Entity,
-                    Text,
-                    Button,
-                    camera,
-                    Func,
-                    color,
-                    window)
-
-from ursina.prefabs.file_browser import FileBrowser
+from ursina import (Ursina, Audio, Entity, Text,
+                    camera, window, color)
 
 # Exceptions
 from configparser import NoSectionError
+
 
 app: Ursina = Ursina(title="RealDrum - Ursina version", 
                      borderless=False, fullscreen=False)
@@ -221,10 +211,38 @@ class TopBar(Entity):
     def __init__(self):
         super().__init__(self)
         
-        self.parent = camera.ui
-        self.bar_bg: Entity = Entity(model='quad', 
-                                     scale_x=1,
-                                     scale_y = .02)
+        #self.parent = ursina.camera.ui
+
+        print("initialized")
+        self.bar_bg: Entity = Entity(
+            parent=camera.ui,
+            model='quad', 
+            scale_x=2,
+            scale_y = .1 *camera.aspect_ratio_getter(),
+            position=window.top,
+            color=color.rgb(.027, .031, .027)
+        )
+        
+        self.logo_text: Text = Text(
+            "Real Drum",
+            font="Fonts/Ubuntu-B.ttf",
+            color=color.rgb(.16, .18, .729),
+            scale=2
+        )
+        
+
+        # idk what i'm doing, the next 9 lines are garbage
+        tmplogo = self.logo_text
+        newpos = ursina.Vec3(
+            window.top_right[0] -(tmplogo.size 
+                                  *(len(tmplogo.text) 
+                                    * camera.aspect_ratio_getter())),
+            window.top_right[1] - .02,
+            -1
+        )
+        tmplogo.position_setter(newpos)
+
+        
 
 
 class GraphicalDrum(Entity):
@@ -517,7 +535,7 @@ def input(key):
 
 def loadElements():
     GraphicalDrum()
-    # TopBar()
+    TopBar()
 
 
 def main():
