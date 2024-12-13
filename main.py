@@ -22,7 +22,8 @@ from ursina.prefabs.file_browser import FileBrowser
 # Exceptions
 from configparser import NoSectionError
 
-app: Ursina = Ursina(borderless=False, fullscreen=False)
+app: Ursina = Ursina(title="RealDrum - Ursina version", 
+                     borderless=False, fullscreen=False)
 parser: ConfigParser = ConfigParser()
 
 
@@ -199,6 +200,7 @@ class Cardinal:
 try:
     parser.read("config.ini")
     drumkit = parser.get('general', 'drumkit') + "/"
+    
     cardinal = Cardinal()
     cardinal.defineVars()
 
@@ -218,7 +220,12 @@ except Exception as e:
 class TopBar(Entity):
     def __init__(self):
         super().__init__(self)
-        pass
+        
+        self.parent = camera.ui
+        self.bar_bg: Entity = Entity(model='quad', 
+                                     scale_x=1,
+                                     scale_y = .02)
+
 
 class GraphicalDrum(Entity):
     def __init__(self):
@@ -226,8 +233,8 @@ class GraphicalDrum(Entity):
 
         self.background = Entity(model='quad',
                                  texture=cardinal.bg_texture,
-                                 scale=(16*camera.aspect_ratio,
-                                        9*camera.aspect_ratio),
+                                 scale=(8*camera.aspect_ratio,
+                                        4.5*camera.aspect_ratio),
                                  z=.3,
                                  y=-.5)
 
