@@ -22,7 +22,7 @@ from ursina.prefabs.file_browser import FileBrowser
 # Exceptions
 from configparser import NoSectionError
 
-app: Ursina = Ursina()
+app: Ursina = Ursina(borderless=False, fullscreen=False)
 parser: ConfigParser = ConfigParser()
 
 
@@ -213,6 +213,12 @@ except Exception as e:
     print(f"\n\n[ERROR]: Unknown Exception: {str(e)}")
     raise e
 
+
+
+class TopBar(Entity):
+    def __init__(self):
+        super().__init__(self)
+        pass
 
 class GraphicalDrum(Entity):
     def __init__(self):
@@ -513,8 +519,6 @@ def main():
 
 
 def windowConfiguration():
-    window.title = "RealDrum - Ursina Cover"
-    Func(setattr, window, 'borderless', False)
     window.exit_button.visible = False
     window.fps_counter.enabled = False
 
